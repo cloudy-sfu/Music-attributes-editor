@@ -1,0 +1,43 @@
+<p class="text-danger">*.wav is not supported.</p>
+<form id="modify-meta">
+<table class="table">
+    <thead>
+    <tr>
+        <td>Filename</td>
+        <td>#</td>
+        <td>Title</td>
+        <td>Album</td>
+        <td>Artist</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for meta in metas %}
+    <tr>
+        <input type="hidden" name="filepath-{{ loop.index }}" value="{{ meta.filepath }}">
+        <td>{{ meta.filename }}</td>
+        <td>
+            <input type="number" value="{{ meta.track }}" name="track-{{ loop.index }}"
+                   style="width: 8ch;">
+        </td>
+        <td>
+            <input type="text" value="{{ meta.title or '' }}"
+                   name="title-{{ loop.index }}"
+                   style="width: 100%;">
+        </td>
+        <td>
+            <input type="text" value="{{ meta.album or '' }}"
+                   name="album-{{ loop.index }}"
+                   style="width: 100%;">
+        </td>
+        <td>
+            <input type="text" value="{{ meta.artist or '' }}"
+                   name="artist-{{ loop.index }}"
+                   style="width: 100%;">
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<input type="hidden" name="total_files" value="{{ n }}">
+</form>
+<button class="btn btn-primary" onclick="modify_meta()">Submit</button>
