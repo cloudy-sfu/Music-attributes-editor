@@ -39,4 +39,7 @@ pyinstaller app.spec
 3. Modify music meta data.
 4. Click "Submit".
 
-![image-20241130045902150](./assets/image-20241130045902150.png)
+<details>
+  <summary>Screenshot</summary>
+  <img src="./assets/image-20241130045902150.png" alt="Homepage which have functions as follows: select a folder, modify music meta data, submit.">
+</details>
