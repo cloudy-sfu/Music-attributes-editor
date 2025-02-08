@@ -8,7 +8,7 @@ import tinytag
 from flask import Flask, request, render_template
 from jinja2 import Environment
 from mutagen import File
-from mutagen.id3 import TRCK, TIT2, TALB, TPE1
+from mutagen.id3 import TRCK, TIT2, TALB, TPE1, ID3
 
 app = Flask(__name__)
 username = os.environ['username']
@@ -110,6 +110,10 @@ def modify_meta():
     for i in range(n):
         i1 = i + 1
         file_path = data.get(f'filepath-{i1}')
+        unblock = data.get(f'unblock-{i1}', False, bool)
+        if unblock:
+            tags = ID3(file_path)
+            tags.delete()
         file = File(file_path, easy=True)
         if file is None:
             messages.append(f"File type of {file_path} is unsupported.")
@@ -118,7 +122,7 @@ def modify_meta():
         title = data.get(f'title-{i1}', '', str)
         album = data.get(f'album-{i1}', '', str)
         artist = data.get(f'artist-{i1}', '', str)
-        if not file.tags:
+        if file.tags is None:
             file.add_tags()
             messages.append(f"{file_path} don't have tags, and is now added.")
         if track_number:

@@ -1,4 +1,15 @@
-<p class="text-danger">*.wav is not supported.</p>
+<div class="alert mb-0 alert-primary">
+    <h4 class="alert-heading">Notes</h4>
+    <ol>
+        <li><code>*.wav</code> is not supported.</li>
+        <li>
+            You can tick "unblock" in the following situation: You find even if
+            you modify a file's attribute, it's still not reflected in file explorer.
+            And, you cannot edit file attributes in file explorer's
+            <code>Properties > Details</code> page.
+        </li>
+    </ol>
+</div>
 <form id="modify-meta">
 <table class="table">
     <thead>
@@ -8,6 +19,7 @@
         <td>Title</td>
         <td>Album</td>
         <td>Artist</td>
+        <td>Unblock</td>
     </tr>
     </thead>
     <tbody>
@@ -33,6 +45,10 @@
             <input type="text" value="{{ meta.artist or '' }}"
                    name="artist-{{ loop.index }}"
                    style="width: 100%;">
+        </td>
+        <td>
+            <input type="checkbox" name="unblock-{{ loop.index }}"
+                   style="vertical-align: middle;">
         </td>
     </tr>
     {% endfor %}
