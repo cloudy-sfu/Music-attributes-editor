@@ -80,7 +80,7 @@ jobs:
       id: app-name
       run: |
         $appName = Get-ChildItem -Path dist | Where-Object { $_.PSIsContainer } | Select-Object -ExpandProperty Name
-        echo "APP_NAME=$version" >> $env:GITHUB_ENV
+        echo "APP_NAME=$appName" >> $env:GITHUB_ENV
       shell: pwsh
 
     - name: Archive the built program
