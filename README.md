@@ -1,5 +1,6 @@
-# Music attributes renamer
-Rename music attributes in Windows
+# Music attributes editor
+
+Edit audio files' title, album, artists in batch in Windows
 
 ![](https://shields.io/badge/dependencies-Python_3.12-blue)
 ![](https://shields.io/badge/OS-Windows_10_64--bit-navy)
@@ -8,9 +9,13 @@ Rename music attributes in Windows
 
 ## Install
 
-Download the latest release, unzip, and run `Music_attributes_renamer.exe`.
+### From release
 
-**Developers**:
+Download the latest release, unzip, and run `Music attributes renamer.exe`.
+
+
+
+### From source code
 
 Create a Python virtual environment and run the following command.
 
@@ -34,12 +39,12 @@ pyinstaller app.spec
 
 ## Usage
 
-1. Select the local folder which is the album.
-2. Click "Load".
-3. Modify music meta data.
-4. Click "Submit".
 
-<details>
-  <summary>Screenshot</summary>
-  <img src="./assets/image-20241130045902150.png" alt="Homepage which have functions as follows: select a folder, modify music meta data, submit.">
-</details>
+
+1. Select the local folder which is the album.
+2. Click "Load". It will display all audio files in the selected folder and its subfolders.
+3. Edit music meta data.
+4. Click "Submit". If meta data still cannot display in operation system's file explorer, click "unblock" for corresponding to these audio files and submit again.
+
+
+
