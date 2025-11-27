@@ -107,10 +107,9 @@ def modify_meta():
     data = request.form
     n = data.get('total_files', default=0, type=int)
     messages = []
-    for i in range(n):
-        i1 = i + 1
-        file_path = data.get(f'filepath-{i1}')
-        unblock = data.get(f'unblock-{i1}', False, bool)
+    for i in range(1, n+1):
+        file_path = data.get(f'filepath-{i}')
+        unblock = data.get(f'unblock-{i}', False, bool)
         if unblock:
             tags = ID3(file_path)
             tags.delete()
@@ -118,10 +117,10 @@ def modify_meta():
         if file is None:
             messages.append(f"File type of {file_path} is unsupported.")
             continue
-        track_number = data.get(f'track-{i1}', '', str)
-        title = data.get(f'title-{i1}', '', str)
-        album = data.get(f'album-{i1}', '', str)
-        artist = data.get(f'artist-{i1}', '', str)
+        track_number = data.get(f'track-{i}', '', str)
+        title = data.get(f'title-{i}', '', str)
+        album = data.get(f'album-{i}', '', str)
+        artist = data.get(f'artist-{i}', '', str)
         if file.tags is None:
             file.add_tags()
             messages.append(f"{file_path} don't have tags, and is now added.")
