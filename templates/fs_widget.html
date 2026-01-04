@@ -9,7 +9,7 @@
         max-width: var(--window-width); overflow-x: auto;">
             {% for name, full_path in drives %}
                 <li><a class="dropdown-item" type="button"
-                     onclick="bind_fs('{{ web_path }}?container_id={{ container_id }}&path={{ full_path | safe }}')">
+                     onclick="bind_fs('{{ web_path }}?container_id={{ container_id }}&path={{ full_path | urlencode }}')">
                   {{ name }}
                 </a></li>
             {% endfor %}
@@ -21,7 +21,7 @@
     </li>
     {% for name, full_path in path_cascade %}
         <a type="button" class="nav-link p-2"
-           onclick="bind_fs('{{ web_path }}?container_id={{ container_id }}&path={{ full_path | safe }}')">
+           onclick="bind_fs('{{ web_path }}?container_id={{ container_id }}&path={{ full_path | urlencode }}')">
             {{ name }}
         </a>
         {% if (not loop.last) or isdir %}
@@ -37,7 +37,7 @@
             max-width: var(--window-width); overflow-x: auto;">
 {% for name, full_path in sub_folders %}
     <li><a class="dropdown-item" type="button"
-         onclick="bind_fs('{{ web_path }}?container_id={{ container_id }}&path={{ full_path | safe }}')">
+         onclick="bind_fs('{{ web_path }}?container_id={{ container_id }}&path={{ full_path | urlencode }}')">
       {{ name }}
     </a></li>
 {% endfor %}

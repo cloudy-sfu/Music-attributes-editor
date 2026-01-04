@@ -3,6 +3,7 @@ import socket
 import string
 import webbrowser
 from ctypes import windll
+from urllib.parse import quote, unquote
 
 import tinytag
 from flask import Flask, request, render_template
@@ -33,12 +34,13 @@ env.filters['none_to_empty'] = none_to_empty
 
 
 def get_folder(path):
+    path = os.path.normpath(path)
     path_split = path.split('\\')
     path_cascade = []
     for i in range(len(path_split)):
         path_cascade.append((
             path_split[i],
-            r'\\'.join(path_split[:i+1])
+            '\\'.join(path_split[:i+1])
         ))
     if path.endswith(':'):  # root directory of a disk
         # os.listdir('C:') will return current folder
@@ -49,7 +51,7 @@ def get_folder(path):
         isdir = True
         try:
             for x in os.listdir(path):
-                x_full_path = r'\\'.join(path_split) + r'\\' + x
+                x_full_path = '\\'.join(path_split) + '\\' + x
                 if os.path.isdir(x_full_path) or os.path.isfile(x_full_path):
                     sub_folders.append((x, x_full_path))
         except PermissionError:
@@ -62,7 +64,7 @@ def get_folder(path):
         sub_folders = None
         isdir = False
     return {'path_cascade': path_cascade, 'sub_folders': sub_folders, 'isdir': isdir,
-            'current_folder': path, 'drives': drives}
+            'current_folder': quote(path), 'drives': drives}
 
 
 @app.route('/')
@@ -82,7 +84,7 @@ def cd():
 @app.route('/view_album', methods=['POST'])
 def view_album():
     data = request.get_json()
-    album_path = data.get('album_path')
+    album_path = unquote(data.get('album_path', ''))
     if not album_path:
         return "The program didn't get the folder path."
     metas = []
